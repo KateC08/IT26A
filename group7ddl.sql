@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2025 at 06:14 AM
+-- Generation Time: Apr 10, 2025 at 06:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `orders` (
-  `Order_ID` varchar(30) NOT NULL,
+  `Order_ID` int(50) NOT NULL,
   `Employee_ID` int(50) NOT NULL,
   `Customer_ID` int(50) NOT NULL,
   `Customer` varchar(50) NOT NULL,
@@ -44,12 +44,13 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `order_details` (
-  `Product_ID` varchar(50) NOT NULL,
-  `Order_ID` varchar(30) DEFAULT NULL,
-  `Quantity` int(30) NOT NULL,
-  `Unit_Price` int(30) NOT NULL,
-  `Discount` int(30) DEFAULT NULL,
-  `Status_ID` varchar(30) NOT NULL
+  `Order_Details_ID` int(50) NOT NULL,
+  `Product_ID` int(50) NOT NULL,
+  `Order_ID` int(50) NOT NULL,
+  `Quantity` int(50) NOT NULL,
+  `Unit_Price` int(50) NOT NULL,
+  `Discount` int(50) DEFAULT NULL,
+  `Status_ID` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -59,11 +60,11 @@ CREATE TABLE `order_details` (
 --
 
 CREATE TABLE `products` (
-  `Product_ID` varchar(50) NOT NULL,
-  `Product_Code` int(30) NOT NULL,
+  `Product_ID` int(50) NOT NULL,
+  `Product_Code` varchar(50) NOT NULL,
   `Product_Name` varchar(50) NOT NULL,
-  `Description` varchar(50) DEFAULT NULL,
-  `Standard_Cost` int(30) NOT NULL,
+  `Description` varchar(100) NOT NULL,
+  `Standard_Cost` int(50) NOT NULL,
   `List_Price` int(50) NOT NULL,
   `Reorder_Level` varchar(50) NOT NULL,
   `Target_Level` varchar(50) DEFAULT NULL,
@@ -84,6 +85,7 @@ ALTER TABLE `orders`
 -- Indexes for table `order_details`
 --
 ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`Order_Details_ID`),
   ADD KEY `Product_ID` (`Product_ID`),
   ADD KEY `Order_ID` (`Order_ID`);
 
